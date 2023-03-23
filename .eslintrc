@@ -1,0 +1,47 @@
+{
+  "extends": ["plugin:react/recommended", "eslint:recommended", "airbnb", "plugin:prettier/recommended"],
+  "plugins": ["react", "prettier"],
+  "ignorePatterns": ["node_modules/"],
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true,
+    "jest": true
+  },
+  "parserOptions": {
+    "parser": "@babel/eslint-parser",
+    "ecmaVersion": 12,
+    "sourceType": "module",
+    "requireConfigFile": "false",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
+  },
+  "rules": {
+    "prettier/prettier": ["error", { "singleQuote": true, "arrowParens": "avoid", "endOfLine": "auto" }], // "singleAttributePerLine": true
+    "no-param-reassign": ["error", { "props": false }],
+    "func-names": ["error", "never"],
+    "no-multi-assign": ["error", { "ignoreNonDeclaration": true }],
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "quotes": [2, "single", { "avoidEscape": true }],
+    "no-console": [0, "never"],
+    "prefer-const": "error",
+    "no-unused-vars": "off", // 변수를 선언하고 사용 안 했을 때 뜨는 에러 off
+    "import/no-named-as-default": 0,
+    // for react
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/function-component-definition": ["error", { "namedComponents": "arrow-function", "unnamedComponents": "arrow-function" }], // 화살표 함수 방식으로 선언하도록 설정
+    "react/prop-types": "off", // props 데이터 타입 작성 off
+    "react/destructuring-assignment": [0, "always"],
+    "react/jsx-pascal-case": "warn", // 컴포넌트 이름은 PascalCase로
+    "react/jsx-wrap-multilines": ["error", { "prop": false }]
+  }
+}
