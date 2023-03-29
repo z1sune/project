@@ -1,0 +1,45 @@
+// intertight
+@font-face {
+  font-family: 'intertight';
+  src: url('/assets/fonts/intertight-regular.woff2') format('woff2'), url('/assets/fonts/intertight-regular.woff') format('woff'),
+    url('/assets/fonts/intertight-regular.ttf') format('truetype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'intertight';
+  src: url('/assets/fonts/intertight-medium.woff2') format('woff2'), url('/assets/fonts/intertight-medium.woff') format('woff'),
+    url('/assets/fonts/intertight-medium.ttf') format('truetype');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'intertight';
+  src: url('/assets/fonts/intertight-semibold.woff2') format('woff2'), url('/assets/fonts/intertight-semibold.woff') format('woff'),
+    url('/assets/fonts/intertight-semibold.ttf') format('truetype');
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'intertight';
+  src: url('/assets/fonts/intertight-bold.woff2') format('woff2'), url('/assets/fonts/intertight-bold.woff') format('woff'),
+    url('/assets/fonts/intertight-bold.ttf') format('truetype');
+  font-weight: 700;
+}
+
+// inconsolata
+@font-face {
+  font-family: 'inconsolata';
+  src: url('/assets/fonts/inconsolata-light.woff2') format('woff2'), url('/assets/fonts/inconsolata-light.woff') format('woff'),
+    url('/assets/fonts/inconsolata-light.ttf') format('truetype');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'inconsolata';
+  src: url('/assets/fonts/inconsolata-regular.woff2') format('woff2'), url('/assets/fonts/inconsolata-regular.woff') format('woff'),
+    url('/assets/fonts/inconsolata-regular.ttf') format('truetype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'inconsolata';
+  src: url('/assets/fonts/inconsolata-medium.woff2') format('woff2'), url('/assets/fonts/inconsolata-medium.woff') format('woff'),
+    url('/assets/fonts/inconsolata-medium.ttf') format('truetype');
+  font-weight: 500;
+}

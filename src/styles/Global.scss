@@ -1,0 +1,44 @@
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
+@import 'base/reset';
+@import 'base/typography';
+
+:root {
+  // font
+  --font-intertight: 'intertight', sans-serif;
+  --font-inconsolata: 'inconsolata', sans-serif;
+
+  // color
+  --color-white: #fff;
+  --color-orange: #ff9139;
+  --color-gray: #8f8f90;
+
+  // easing
+  --transition-ease: cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 0.05208vw;
+  // font-size: calc(100 / #{$pcMax}vw);
+  @include only-tablet {
+    font-size: 0.09767vw;
+    // font-size: calc(100 / #{$tabletMax}vw);
+  }
+  @include only-mobile {
+    font-size: 0.277vw;
+    // font-size: calc(100 / #{$mobileMin}vw);
+  }
+}
+
+html,
+body {
+  font-family: var(--font-inconsolata);
+  font-weight: 400;
+  color: #fff;
+  cursor: crosshair;
+}
