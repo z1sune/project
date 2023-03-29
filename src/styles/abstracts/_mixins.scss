@@ -1,0 +1,20 @@
+@mixin only-pc {
+  @media screen and (min-width:#{$pcMin}px) {
+    @content;
+  }
+}
+@mixin only-tablet {
+  @media screen and (min-width:#{$tabletMin}px) and (max-width:#{$tabletMax}px) {
+    @content;
+  }
+}
+@mixin only-mobile {
+  @media screen and (max-width:#{$mobileMax}px) {
+    @content;
+  }
+}
+@mixin not-pc {
+  @media screen and (max-width:#{$tabletMax}px) {
+    @content;
+  }
+}

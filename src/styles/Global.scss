@@ -4,20 +4,6 @@
 @import 'base/reset';
 @import 'base/typography';
 
-:root {
-  // font
-  --font-intertight: 'intertight', sans-serif;
-  --font-inconsolata: 'inconsolata', sans-serif;
-
-  // color
-  --color-white: #fff;
-  --color-orange: #ff9139;
-  --color-gray: #8f8f90;
-
-  // easing
-  --transition-ease: cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
 * {
   box-sizing: border-box;
 }
@@ -37,7 +23,7 @@ html {
 
 html,
 body {
-  font-family: var(--font-inconsolata);
+  font-family: $font-inconsolata;
   font-weight: 400;
   color: #fff;
   cursor: crosshair;
