@@ -1,0 +1,24 @@
+@import 'styles/abstracts/mixins';
+
+.wrap {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0 28px 0;
+}
+.item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 12px;
+}
+.item {
+  &__link-wrap {
+    display: inline-flex;
+  }
+  &__link,
+  &__copy {
+    padding: 20px 25px;
+  }
+}
