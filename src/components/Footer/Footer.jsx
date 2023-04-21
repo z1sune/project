@@ -1,15 +1,18 @@
 import { Link } from 'react-router-dom';
 
+import classnames from 'classnames/bind';
 import footer from 'components/Footer/Footer.module.scss';
+
+const cn = classnames.bind(footer);
 
 const Footer = ({ getCursorState }) => {
   return (
-    <footer className={footer.wrap}>
-      <div className={footer.item}>
-        <div className={footer['item__link-wrap']}>
+    <footer className={cn('footer')}>
+      <div className={cn('footer__item')}>
+        <div className={cn('footer__link-wrap')}>
           <Link
             to="project"
-            className={footer.item__link}
+            className={cn('footer__link')}
             onMouseEnter={() => getCursorState(true)}
             onMouseLeave={() => getCursorState(false)}
           >
@@ -17,14 +20,14 @@ const Footer = ({ getCursorState }) => {
           </Link>
           <Link
             to="contact"
-            className={footer.item__link}
+            className={cn('footer__link')}
             onMouseEnter={() => getCursorState(true)}
             onMouseLeave={() => getCursorState(false)}
           >
             CONTACT
           </Link>
         </div>
-        <div className={footer.item__copy}>&copy; JISUN LEE 2023</div>
+        <div className={cn('footer__copy')}>&copy; JISUN LEE 2023</div>
       </div>
     </footer>
   );
