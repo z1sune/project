@@ -1,3 +1,11 @@
+// screen width
+$pcMax: 1920;
+$pcMin: 1025;
+$tabletMax: 1024;
+$tabletMin: 769;
+$mobileMax: 768;
+$mobileMin: 361;
+
 // font
 $font-intertight: 'intertight', sans-serif;
 $font-inconsolata: 'inconsolata', sans-serif;
@@ -10,10 +18,5 @@ $color-gray: #8f8f90;
 // easing
 $transition-ease: cubic-bezier(0.25, 0.8, 0.25, 1);
 
-// screen width
-$pcMax: 1920;
-$pcMin: 1025;
-$tabletMax: 1024;
-$tabletMin: 769;
-$mobileMax: 768;
-$mobileMin: 361;
+// animattion
+$animation-filcker: flicker 1s infinite;
