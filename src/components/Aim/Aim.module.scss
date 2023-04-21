@@ -1,0 +1,80 @@
+@import 'styles/abstracts/variables';
+@import 'styles/abstracts/mixins';
+
+.cross {
+  $cross: &;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 90;
+  width: 50px;
+  height: 50px;
+  cursor: crosshair;
+  &:hover {
+    #{$cross}__edge {
+      width: 10px;
+      height: 10px;
+    }
+    #{$cross}__circle {
+      &:before,
+      &:after {
+        transition-duration: 0.7s;
+      }
+      &:before {
+        box-shadow: inset 0 0 0 5px $color-white, 0 0 0 1px $color-white;
+      }
+      &:after {
+        box-shadow: inset 0 0 0 2.5px $color-orange, 0 0 0 1px $color-orange;
+      }
+    }
+  }
+  &__edge {
+    @include edge(5, 5);
+  }
+  &__circle {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      transition: all 0.35s $transition-ease;
+    }
+    &:before {
+      width: 50px;
+      height: 50px;
+      box-shadow: inset 0 0 0 1px $color-white, 0 0 0 1px $color-white;
+    }
+    &:after {
+      width: 25px;
+      height: 25px;
+      box-shadow: inset 0 0 0 1px $color-orange;
+    }
+  }
+  &__bar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 75px;
+    margin-right: 1px;
+    box-shadow: 0 0 0 0.5px $color-gray;
+    transition: height 0.35s ease-in 0s, transform 0.55s ease-out 0.4s;
+    // pointer-events: none;
+    &--horiz {
+    }
+    &--verti {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+  }
+}
