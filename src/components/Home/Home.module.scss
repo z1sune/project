@@ -1,0 +1,49 @@
+@import 'styles/abstracts/variables';
+@import 'styles/abstracts/mixins';
+
+.home {
+  padding: 0 50px;
+  &__title {
+    // overflow: hidden;
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    font-family: $font-intertight;
+    font-weight: 600;
+    letter-spacing: -7.8rem;
+    &-gun {
+      position: relative;
+      text-indent: -65rem;
+      margin-bottom: -20rem;
+      font-size: 175rem;
+      span {
+        &:after {
+          content: '*';
+          position: absolute;
+          top: 50%;
+          right: 0;
+          transform: translate(0, -50%) translate(100rem, 12rem);
+          font-size: 80rem;
+        }
+        position: relative;
+      }
+    }
+    &-text {
+      font-size: 250rem;
+      display: inline-flex;
+      span {
+        will-change: transform;
+        &:hover {
+          color: #000;
+          text-shadow: -1px 0 $color-white, 0 1px $color-white, 1px 0 $color-white, 0 -1px $color-white;
+          transform: translateY(10rem);
+          @for $i from 1 to 9 {
+            &:nth-child(#{$i}) {
+              transition: transform $transition-ease calc((#{$i} / 2 * 0.5s) + 0.5s) 0s;
+            }
+          }
+        }
+      }
+    }
+  }
+}
