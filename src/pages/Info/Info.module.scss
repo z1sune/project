@@ -1,0 +1,189 @@
+@import 'styles/abstracts/variables';
+@import 'styles/abstracts/mixins';
+
+$marquee-height: 100%; // 박스 너비 값
+$marquee-elements: 5; // 전체 아이템 개수
+$marquee-element-height: calc(#{$marquee-height} / 2); // 박스 너비 값 / 박스안에 보여지는 아이템 개수
+$marquee-animation-duration: calc(#{$marquee-elements} * 35s); // 이동하는 속도
+
+.info {
+  $info: &;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0 300rem;
+  &__logbook {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 50px;
+  }
+  &__gallery {
+    display: flex;
+    margin: 0 -20rem;
+    &-col {
+      width: 100%;
+      height: 100%;
+      margin: -20rem 20rem;
+      animation-duration: calc(#{$marquee-animation-duration});
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      &:nth-child(1),
+      &:nth-child(3) {
+        animation-name: flowImageToTop;
+      }
+      &:nth-child(2) {
+        transform: translateY(-84.4%);
+        animation-name: flowImageToBtm;
+      }
+    }
+    &-img {
+      width: 100%;
+      height: 600rem;
+      margin: 20rem 0;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  // &__swiper-wrap {
+  //   width: 100%;
+  //   height: 100%;
+  // }
+  // &__swiper {
+  //   width: 100%;
+  //   height: 100%;
+  //   &-slide {
+  //     width: 100%;
+  //     height: 100%;
+  //   }
+  // }
+  // &__card-wrap {
+  //   width: 100%;
+  //   height: 100%;
+  //   padding: 0 320rem;
+  // }
+  // &__card-con {
+  //   width: 100%;
+  //   height: 100%;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   -webkit-perspective: 1000px;
+  //   perspective: 1000px;
+  // }
+  // &__card {
+  //   position: relative;
+  //   width: 520rem;
+  //   height: 720rem;
+  //   transition: transform 0.35s linear;
+  //   -webkit-transform-style: preserve-3d;
+  //   transform-style: preserve-3d;
+  //   box-shadow: 0 10rem 20rem rgba(255, 255, 255, 0.2), 0 0 50rem rgba(255, 255, 255, 0.2);
+  //   &-name {
+  //     position: absolute;
+  //     top: 50%;
+  //     left: 50%;
+  //     transform: translate(-50%, -50%) translateY(-260rem);
+  //     width: 100%;
+  //     font-weight: 700;
+  //     font-size: 82rem;
+  //     letter-spacing: 1.2px;
+  //     text-align: center;
+  //     text-transform: uppercase;
+  //     div {
+  //       margin: 0 -100rem;
+  //     }
+  //   }
+  //   &-text-wrap {
+  //     display: flex;
+  //     justify-content: flex-end;
+  //     position: absolute;
+  //     top: 50%;
+  //     left: 50%;
+  //     transform: translate(-50%, -50%) translateY(266rem);
+  //     width: 100%;
+  //   }
+  //   &-text {
+  //     justify-self: flex-end;
+  //     width: 100%;
+  //     font-size: 32rem;
+  //     text-align: center;
+  //     text-transform: uppercase;
+  //     div {
+  //       margin: 0 -100rem;
+  //     }
+  //   }
+  //   &-img {
+  //     overflow: hidden;
+  //     position: relative;
+  //     width: 100%;
+  //     height: 100%;
+  //     border-radius: 15rem;
+  //     // border: 1px solid #fff;
+  //     img {
+  //       width: 100%;
+  //       height: 100%;
+  //       object-fit: cover;
+  //     }
+  //     &:after {
+  //       // backdropfilter
+  //       content: '';
+  //       position: absolute;
+  //       top: 0;
+  //       left: 0;
+  //       width: 100%;
+  //       height: 100%;
+  //       // -webkit-backdrop-filter: blur(10px);
+  //       // backdrop-filter: blur(10px);
+  //     }
+  //   }
+  //   &--active {
+  //     #{$info}__card-name,
+  //     #{$info}__card-text-wrap {
+  //       translate: 0 0 50rem;
+  //     }
+  //   }
+  // }
+}
+
+// matter.js
+// .games {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   &__name {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     font-family: $font-intertight;
+//     font-size: 30px;
+//     font-weight: 700;
+//     text-transform: uppercase;
+//     text-align: center;
+//     // cursor: grab;
+//   }
+// }
+
+@keyframes flowImageToTop {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(calc(-1 * #{$marquee-element-height} * #{$marquee-elements}));
+  }
+}
+
+@keyframes flowImageToBtm {
+  0% {
+    transform: translateY(-84.4%);
+  }
+  100% {
+    transform: translateY(calc(1 * #{$marquee-element-height} * #{$marquee-elements}));
+  }
+}
