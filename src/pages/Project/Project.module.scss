@@ -1,0 +1,233 @@
+@import 'styles/abstracts/variables';
+@import 'styles/abstracts/mixins';
+
+// variables
+$marquee-width: 100%; // 박스 너비 값
+// $marquee-height: 20vh; // 박스 높이 값
+$marquee-elements: 5; // 전체 아이템 개수
+$marquee-element-width: calc(#{$marquee-width} / 4); // 박스 너비 값 / 박스안에 보여지는 아이템 개수
+$marquee-animation-duration: calc(#{$marquee-elements} * 3s); // 이동하는 속도
+
+.project {
+  width: 100%;
+  height: 100%;
+  &__content {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 1px;
+      border-top: 1px solid $color-gray;
+    }
+    &:before {
+      top: 0;
+    }
+    &:after {
+      bottom: 0;
+    }
+    &-left {
+      width: 50%;
+      padding: 50px;
+    }
+    &-right {
+      width: 50%;
+    }
+  }
+  // left
+  &__tit {
+    font-family: $font-intertight;
+    font-weight: 700;
+    font-size: 76px;
+    letter-spacing: -0.2px;
+  }
+  &__logboox {
+    margin: 55px 0 0;
+  }
+  &__search {
+    $search: &;
+    width: 300px;
+    margin: 30px 0 0;
+    label {
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+    &-input {
+      position: relative;
+      margin: 15px 0 0;
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        background: url('/assets/images/project/search.svg') no-repeat left top / contain;
+      }
+      input {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        padding: 18px 16px 16px 50px;
+        font-family: $font-inconsolata;
+        font-size: 16px;
+        line-height: 1;
+        color: #fff;
+        &:hover {
+          + #{$search}__input-edge-wrap {
+            span {
+              width: 10px;
+              height: 10px;
+            }
+          }
+        }
+      }
+      &-edge-wrap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      &-edge {
+        @include edge(7, 7);
+      }
+    }
+  }
+  // right
+  &__list {
+    $list: &;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: rgba($color: #fff, $alpha: 0.3);
+    }
+    &::-webkit-scrollbar-track {
+      background-color: #000;
+    }
+    &-itm {
+      overflow: hidden;
+      position: relative;
+      padding: 60px;
+      border-top: 1px solid $color-gray;
+      &:hover {
+        #{$list}-marquee-wrap {
+          transform: translateY(0);
+        }
+        #{$list}-marquee {
+          animation-play-state: running;
+        }
+      }
+      &:first-child {
+        border: none;
+      }
+    }
+    &-year {
+      font-size: 12px;
+    }
+    &-name-wrap {
+      position: relative;
+    }
+    &-name {
+      margin: 20px 0 0;
+      padding: 0 36px 0 0;
+      font-family: $font-intertight;
+      font-weight: 700;
+      font-size: 70px;
+      text-transform: uppercase;
+      // font-size: 76px;
+    }
+    &-link {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      // transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      a {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      &-svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &-row {
+      display: flex;
+      margin: 40px 0 0;
+      font-size: 14px;
+      text-transform: uppercase;
+      span {
+        width: 50%;
+      }
+      &-cla {
+        position: relative;
+        padding: 0 0 0 12px;
+        &:before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          background-color: $color-orange;
+          animation: $animation-filcker;
+        }
+      }
+    }
+    &-marquee-wrap {
+      overflow: hidden;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: $marquee-width;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.42, 0.08, 0.47, 0.82);
+      background-color: $color-orange;
+    }
+    &-marquee {
+      display: inline-flex;
+      width: 100%;
+      padding: 14px 0;
+      animation: marqueeAni calc(#{$marquee-animation-duration}) linear infinite;
+      animation-play-state: paused;
+      will-change: transform;
+      li {
+        display: inline-block;
+        flex-shrink: 0;
+        width: $marquee-element-width;
+        text-align: center;
+        white-space: nowrap;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+@keyframes marqueeAni {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-1 * #{$marquee-element-width} * #{$marquee-elements}));
+  }
+}
