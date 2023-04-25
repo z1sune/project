@@ -1,10 +1,14 @@
-import { useRef, useState, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef, useState, useEffect, useLayoutEffect } from 'react';
+import { gsap, ScrollTrigger } from 'gsap/all';
 
 import classnames from 'classnames/bind';
 import info from 'pages/Info/Info.module.scss';
+import { use } from 'matter-js';
 
+// gsap
+gsap.registerPlugin(ScrollTrigger);
+
+// classnames
 const cn = classnames.bind(info);
 
 const dataGameList = {
@@ -226,7 +230,84 @@ const dataGameList = {
 // ];
 
 const Info = ({ getLink }) => {
+  const galleryRef = useRef();
   const colRef = useRef([]);
+  const imageRef = useRef();
+
+  const appendImages = () => {
+    colRef.current.forEach(col => {
+      col.querySelectorAll('.gallery-img').forEach(item => {
+        col.querySelector('.gallery-col__inr').appendChild(item.cloneNode(true));
+      });
+    });
+  };
+
+  // https://codesandbox.io/s/gsap-endless-marquee-forked-6e26l9?file=/src/Marquee.js
+  const test = () => {
+    // const additionalY = { val: 0 };
+    let additionalYAnim;
+    // const offset = 0;
+    const galleryHeight = galleryRef.current.offsetHeight;
+
+    colRef.current.forEach((col, idx) => {
+      // Change direction for odd columns
+      const direction = idx % 2 !== 0 ? '+=' : '-=';
+      const imageHeight = imageRef.current.offsetHeight + parseFloat(getComputedStyle(imageRef.current).getPropertyValue('margin-top'));
+
+      col.querySelectorAll('.gallery-img').forEach((img, i, arr) => {
+        gsap.set(arr, {
+          y: index => index * imageHeight
+        });
+
+        const wrap = gsap.utils.wrap(0, 600);
+
+        // position in a col
+        // gsap.to(arr, {
+        //   y: () => direction + galleryHeight,
+        //   duration: 10,
+        //   ease: 'none',
+        //   repeat: -1,
+        //   modifiers: {
+        //     y: gsap.utils.unitize(y => wrap(parseFloat(y)))
+        //   }
+        // });
+      });
+    });
+
+    // ScrollTrigger.create({
+    //   trigger: galleryRef,
+    //   start: 'top 50%',
+    //   end: 'bottom 50%',
+    //   invalidateOnRefresh: true,
+    //   markers: true,
+    //   onUpdate: self => {
+    //     const velocity = self.getVelocity();
+    //     if (velocity > 0) {
+    //       if (additionalYAnim) additionalYAnim.kill();
+    //       additionalY.val = -velocity / 2000;
+    //       additionalYAnim = gsap.to(additionalY, { val: 0 });
+    //     }
+    //     if (velocity < 0) {
+    //       if (additionalYAnim) additionalYAnim.kill();
+    //       additionalY.val = -velocity / 3000;
+    //       additionalYAnim = gsap.to(additionalY, { val: 0 });
+    //     }
+    //   }
+    // });
+  };
+
+  useEffect(() => {
+    getLink('/'); // 홈으로 이동
+  }, []);
+
+  useLayoutEffect(() => {
+    appendImages(); // 이미지 추가
+    // const ctx = gsap.context(() => {
+    test(); // ani
+    // });
+    // return () => ctx.revert();
+  }, []);
+
   // const [movement, setMovement] = useState(false);
   // const [coordinate, setCoordinate] = useState({});
 
@@ -235,29 +316,6 @@ const Info = ({ getLink }) => {
   //   setMovement(true);
   //   setCoordinate({ x: (window.innerHeight / 2 - e.clientY) / 15, y: (window.innerWidth / 2 - e.clientX) / 15 });
   // };
-
-  const appendImages = () => {
-    colRef.current.forEach(col => {
-      col.querySelectorAll('.gallery-img').forEach(item => {
-        col.appendChild(item.cloneNode(true));
-      });
-    });
-  };
-
-  useEffect(() => {
-    getLink('/'); // 홈으로 이동
-    appendImages();
-
-    ScrollTrigger.create({
-      trigger: '.Info_info__vyIut',
-      start: () => 'top 50%',
-      end: 'bottom 50%',
-      markers: true,
-      onUpdate: () => {
-        console.log('update');
-      }
-    });
-  }, []);
 
   return (
     <div className={cn('info')}>
@@ -273,21 +331,25 @@ const Info = ({ getLink }) => {
         </div>
         <span>&#93;</span>
       </div>
-      <div className={cn('info__gallery')}>
-        {Object.values(dataGameList).map((game, idx) => (
-          <div
-            ref={el => {
-              colRef.current[idx] = el;
-            }}
-            className={cn('gallery-col', 'info__gallery-col')}
-          >
-            {game.map(img => (
-              <div className={cn('gallery-img', 'info__gallery-img')}>
-                <img src={img.image} alt={img.name} />
+      <div ref={galleryRef} className={cn('info__gallery')}>
+        <div className={cn('info__gallery-inr')}>
+          {Object.values(dataGameList).map((game, idx) => (
+            <div
+              ref={el => {
+                colRef.current[idx] = el;
+              }}
+              className={cn('gallery-col', 'info__gallery-col')}
+            >
+              <div className={cn('gallery-col__inr', 'info__gallery-col-inr')}>
+                {game.map(img => (
+                  <div ref={imageRef} className={cn('gallery-img', 'info__gallery-img')}>
+                    <img src={img.image} alt={img.name} />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        ))}
+            </div>
+          ))}
+        </div>
       </div>
       {/**
        * swiper
